@@ -69,8 +69,9 @@ def run(config):
 	# find users without graceLogins
 	users_without_grace_logins = algorithm.search_users_without_grace_logins(config, con)
 
-	# send admin email
-	algorithm.notify_admin(config, con, notified_users, failed_users, users_without_email, users_without_grace_logins)
+	# send admin email unless everything is empty
+	if len(notified_users) > 0 or len(failed_users) > 0 or len(users_without_email) > 0 or len(users_without_grace_logins) > 0:
+		algorithm.notify_admin(config, con, notified_users, failed_users, users_without_email, users_without_grace_logins)
 
 def main(argv):
 	try:
